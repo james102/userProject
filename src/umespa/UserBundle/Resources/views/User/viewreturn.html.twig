@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+ {{include('menu.html.twig')}}		   
+  <br>
+	        <br>
+	        <br>
+ <div class="container well">
+
+	<!--ul class="nav navbar-nav">
+		<li calss="nav-item"><a href="#">Servicos</a></li>
+		<li calss="nav-item"><a href="#">dsd</a></li>
+	</ul>
+
+	<div class="page-header"></div-->
+
+	<div class="col-md-9">
+		<h2>{{ user.FristName}}&nbsp;{{ user.lastName }}</h2>
+	
+		<br>
+		<dt>{{'Cateirinha: '|trans}}<span class="text-info" >{{'Processo em Análise' }}&nbsp;</span></dt>
+        <dt>{{'Descricao: '|trans}}<span class="text-info" >{{'Pocesso enviado para setor de analise' }}&nbsp;</span></dt>
+		<dt>{{'Protocolo: '|trans}}<span class="text-info" >{{'012018' }}</span></dt>
+
+
+		<!--dt>{{'Active'|trans}}</dt>
+		<dd>
+		{% if user.isActive == 1 %}
+		<span class="text-success"><a href=" ">{% trans %}Carteirinha{% endtrans %}</a></span>
+		<span class="text-success"><a href=" ">{% trans %}Passe Livre Estudantil{% endtrans %}</a></span>
+		{% elseif user.isActive == 0 %}
+		<span class="text-warning">{% trans %}Disabled{% endtrans %}</span>
+		{% endif %}
+		&nbsp;
+		</dd>
+    </div>
+	<!--div class="col-md-3">
+		<h3>{{ 'Actions'|trans }}:</h3>
+		<p>
+		<a href="{{ path('umespa_user_edit', { id: user.id }) }}" class="btn btn-primary btn-lg btn-block">
+		<span class="glyphicon glyphicon-edit"></span>
+		{{ 'Edit user'|trans }}
+		</a>
+		</p>
+    </div-->
+</div>
+{% endblock %}

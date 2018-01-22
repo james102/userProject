@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('public/css/signin.css') }}">
+{% endblock %}
+
+{% block body %}
+	{{ parent() }}
+
+    <div class="container">
+		<form action="/user/view/paulo" method="post" class="form-signin">
+			<h2 class="form-signin-heading">{{ 'Login'|trans }}</h2>
+
+            {% if error %}
+            <div class="text-danger">
+                <p>
+                    <strong>
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </strong>
+                </p>
+            </div>
+            {% endif %}
+
+		    <label for="username" class="sr-only">{{ 'CPF'|trans }}:</label>
+		    <input type="text" id="username" class="form-control" name="_username" value="{{ last_username }}" placeholder="{{ 'CPF'|trans }}" required autofocus />
+
+		    <label for="password" class="sr-only">{{ 'Senha'|trans }}:</label>
+		    <input type="password" id="password" class="form-control" name="_password" placeholder="{{ 'Senha'|trans }}" required />
+		    
+		    <input type="hidden" name="_target_path" value="emm_user_homepage" />
+
+		    <button type="submit" class="btn btn-lg btn-primary btn-block">{{ 'Logar'|trans }}</button>
+            <p class="text-center"> <a href="#">Esqueci minha senha/e-mail</a> </p>
+             <p class="text-center" >Novo Cadastramento <a href="/user/add"> Cadastre Aqui </a></p>
+		</form>
+    </div> <!-- /container -->
+{% endblock %}

@@ -1,0 +1,15 @@
+#----Pagina inicial
+umespa_index:
+    path:     /
+    defaults: { _controller: umespaUserBundle:Default:index } # pasta 'src/umespa/userBundle/Resource/views/default'
+    
+#---------------------------------------------------------------   
+
+#menu solicita carteirinha
+umespa_emitirCarteira:
+    path:     /emitirCarteirinha
+    defaults: { _controller: umespaUserBundle:AlunoController:emitirCarteirinha } 
+umespa_checaIdade:
+    path:     /checaIdade
+    defaults: { _controller: umespaUserBundle:AlunoController:checaIdade } 
+

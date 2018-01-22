@@ -1,0 +1,62 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+{{parent()}}
+<div class="container">
+<div class="col-md-12">
+<div class="page-header margin-none">
+<h2 class="padding-none">Users</h2>
+</div>
+<div class="table-responsive">
+<table class="table table-striped table-hover">
+<tr>
+<th>Username</th>
+<th>Frist Name</th>
+<th>Las Name</th>
+<th>Email</th>
+<th>Role</th>
+<th>Created</th>
+<th>Update</th>
+<th>Action</th>
+</tr>
+{% for user in users %}
+
+<tr>
+<td>{{ user.userame }}</td>
+<td>{{ user.fristName }}</td>
+<td>{{ user.lastName }}</td>
+<td>{{ user.email }}</td>
+<td>
+{% if user.role =='ROLE_ADMIN' %}
+<strong>Administrador</strong>
+{% elseif user.role =='ROLE_USER' %}
+<strong>User</strong>
+{% endif  %}
+
+</td>
+<td>{{ user.createdAt|date('d-m-h H:i') }}</td>
+<td>{{ user.updateAt|date('d-m-h H:i') }}</td>
+<td>
+<a  href="/user/view/{{ user.userame }}" class="btn btn-sm btn-info">View</a>
+<a href="#" class="btn btn-sm btn-primary">Edit</a>
+<a href="#" class="btn btn-sm btn-danger btn-delete">Delet</a>
+
+
+</td>
+
+
+</tr>
+
+{% endfor %}
+
+
+
+</table>
+</div>
+</div>
+
+</div>
+
+
+
+{% endblock %}
