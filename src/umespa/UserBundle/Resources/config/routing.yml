@@ -6,6 +6,9 @@ umespa_index:
 #---------------------------------------------------------------   
 
 #menu solicita carteirinha
+umespa_criaConta:
+    path:     /criaConta/{cad}
+    defaults: { _controller: umespaUserBundle:AlunoController:criaConta } 
 umespa_emitirCarteira:
     path:     /emitirCarteirinha
     defaults: { _controller: umespaUserBundle:AlunoController:emitirCarteirinha } 

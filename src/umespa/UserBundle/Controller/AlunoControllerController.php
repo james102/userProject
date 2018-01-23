@@ -8,9 +8,22 @@ use umespa\UserBundle\Entity\Aluno;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-
+//http://www.linhadecodigo.com.br/artigo/3602/crop-jquery-recortando-imagens-com-jcrop.aspx
 class AlunoControllerController extends Controller
 {
+
+ public function criaContaAction($cad)
+    {
+        $buttonNome ='Logar';
+      if( $cad !='login' )
+        {
+          $buttonNome='Criar Conta';
+        }     
+
+       
+        return $this->render('umespaUserBundle:AlunoController:criaConta.html.twig',array('page'=>$cad,'nome'=> $buttonNome));   
+    }
+
     public function emitirCarteirinhaAction()
     {
         $aluno = new Aluno();

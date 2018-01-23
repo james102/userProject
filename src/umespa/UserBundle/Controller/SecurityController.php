@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class SecurityController extends Controller
-{/*
+{
     public function LoginAction()
     {
         $authenticationUtils = $this->get('security.authentication_utils');
@@ -17,5 +17,5 @@ class SecurityController extends Controller
         
         return $this->render('umespaUserBundle:Security:login.html.twig', array('last_username' => $lastUsername, 'error' => $error));
     }
-*/
+
 }

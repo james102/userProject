@@ -12,7 +12,7 @@ use umespa\UserBundle\Entity\User;
 class UserController extends Controller
 {
 
-   /* public function homeAction()
+    public function homeAction()
     {
         return $this->render('umespaUserBundle:User:home.html.twig');
     }
@@ -25,15 +25,14 @@ class UserController extends Controller
        {
            $res .='Usuario: '.$user->getUserame().' - Email: '.$user->getEmail().'<br />';    
        }
-       return new Response($res);
+       return new Response($res);*/
        $em= $this->getDoctrine()->getManager();
        $users = $em->getRepository('umespaUserBundle:User')->findAll();
 
        return $this->render('umespaUserBundle:User:index.html.twig', array('users' => $users));
-      // return new Response('jj');
+       //return new Response('jj');
 
     }
-    
 
     public function viewAction($userame)
     {
@@ -45,8 +44,7 @@ class UserController extends Controller
        // return new Response('Usuario: '.$user->getUserame().' Email: '.$user->getEmail());
         return $this->render('umespaUserBundle:User:view.html.twig', array('user' => $user));
     }
-
-    public function viewDescriptAction($userame)
+public function viewDescriptAction($userame)
     {
         $repository = $this->getDoctrine()->getRepository('umespaUserBundle:User');
        // $user= $repository->find($id);
@@ -94,5 +92,4 @@ class UserController extends Controller
               return $this->render('umespaUserBundle:User:add.html.twig', array('form' => $form->createView()));
 
     }
-    */
 }

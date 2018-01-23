@@ -1,4 +1,4 @@
-umespa:
+umespa_user:
     resource: "@umespaUserBundle/Resources/config/routing.yml"
     prefix:   /
 
