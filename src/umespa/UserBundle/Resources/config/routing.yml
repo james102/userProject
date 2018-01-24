@@ -9,6 +9,9 @@ umespa_index:
 umespa_criaConta:
     path:     /criaConta/{cad}
     defaults: { _controller: umespaUserBundle:AlunoController:criaConta } 
+umespa_trataDadosTemp:
+    path:     /trataDados
+    defaults: { _controller: umespaUserBundle:AlunoController:trataDados } 
 umespa_emitirCarteira:
     path:     /emitirCarteirinha
     defaults: { _controller: umespaUserBundle:AlunoController:emitirCarteirinha } 

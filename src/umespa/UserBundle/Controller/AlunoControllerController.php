@@ -8,6 +8,9 @@ use umespa\UserBundle\Entity\Aluno;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+
+use umespa\UserBundle\Entity\Temp;
+use umespa\UserBundle\Form\TempType;
 //http://www.linhadecodigo.com.br/artigo/3602/crop-jquery-recortando-imagens-com-jcrop.aspx
 class AlunoControllerController extends Controller
 {
@@ -15,14 +18,38 @@ class AlunoControllerController extends Controller
  public function criaContaAction($cad)
     {
         $buttonNome ='Logar';
+
       if( $cad !='login' )
         {
           $buttonNome='Criar Conta';
         }     
 
-       
-        return $this->render('umespaUserBundle:AlunoController:criaConta.html.twig',array('page'=>$cad,'nome'=> $buttonNome));   
+       $temp = new Temp();
+       $form = $this->GeraFormTemp($temp);    
+        return $this->render('umespaUserBundle:AlunoController:criaConta.html.twig',array('page'=>$cad,'nome'=> $buttonNome,'form' => $form->createView()));   
     }
+
+    public function GeraFormTemp(Temp $entity)//cria forma no twig
+    {
+        $form = $this->createForm(new TempType(),$entity,array(
+            'action'=>$this->generateUrl('umespa_trataDadosTemp'),
+            'method'=>'POST'
+        ));
+        return $form;
+    }
+
+   public function trataDadosAction(Request $request)
+   {
+    $temp = new Temp();
+    $form = $this->GeraFormTemp($temp);
+    $form->handleRequest($request);
+    $nome=$form->get('nome')->getData();
+    return new Response($nome);
+   }
+
+
+
+
 
     public function emitirCarteirinhaAction()
     {

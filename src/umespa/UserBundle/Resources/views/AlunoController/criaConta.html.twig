@@ -8,12 +8,14 @@
 					
 						
 						<div class="row" id="email-account-container">
-							<form id="form-register" name="form-register" class="loginItems" action="/criar-conta?targetUrl=" method="post" novalidate="novalidate">
+							<!--form id="form-registra" name="form-registra" class="loginItems" action="#" method="post" novalidate="novalidate"-->
+					  {{ form_start(form, { 'attr' : { 'novalidate': 'novalidate', 'r0ole' : 'form'} }) }}
                          {% if (page !='login') %}
                             <div class="form-group col-xs-9">
 								  <label class="control-label col-sm-3 hidden-xs" for="nome">NOME:</label>
 								  <div class="col-sm-9 col-xs-9">
-									<input id="nome" name="nome" minlength="6" placeholder="Nome Completo" class="form-control" required="true" type="text" value="" maxlength="80" aria-required="true">
+									<!--input id="nome" name="nome" minlength="6" placeholder="Nome Completo" class="form-control" required="true" type="text" value="" maxlength="80" aria-required="true"-->
+									   {{ form_widget(form.nome, { 'attr' : {'class' : 'form-control', 'placeholder' : 'Nome Completo'} }) }}
 									
 								  </div>
 							</div>
@@ -21,14 +23,16 @@
 							<div class="form-group  col-xs-9">
 								<label class="control-label col-sm-3 hidden-xs" for="email">E-MAIL:</label>
 								<div class="col-sm-9  col-xs-9">
-								<input id="email" name="email" mailcustom="true" uniqueemail="true" placeholder="E-mail" data-url-validation="/usuario/email-validacao/" class="form-control" required="true" type="text" value="" maxlength="64" aria-required="true">
+								<!--input id="email" name="email" mailcustom="true" uniqueemail="true" placeholder="E-mail" data-url-validation="/usuario/email-validacao/" class="form-control" required="true" type="text" value="" maxlength="64" aria-required="true"-->
+								   {{ form_widget(form.email, { 'attr' : {'class' : 'form-control', 'placeholder' : 'E-mail'} }) }}
 							    
 								</div>
 							</div>
 							  <div class="form-group col-xs-9">
 								  <label class="control-label col-sm-3 hidden-xs" for="senha">SENHA:</label>
 								  <div class="col-sm-9  col-xs-9">
-							  <input id="senha" name="senha" minlength="6" placeholder="Senha" type="password" class="form-control" required="true" value="" maxlength="20" aria-required="true">
+							  <!--input id="senha" name="senha" minlength="6" placeholder="Senha" type="password" class="form-control" required="true" value="" maxlength="20" aria-required="true"-->
+							     {{ form_widget(form.senha, { 'attr' : {'class' : 'form-control', 'placeholder' : 'Senha'} }) }}
 							  
 								  </div>
 							</div>
