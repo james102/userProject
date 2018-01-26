@@ -19,3 +19,8 @@ umespa_checaIdade:
     path:     /checaIdade
     defaults: { _controller: umespaUserBundle:AlunoController:checaIdade } 
 
+
+#send mail 
+umespa_sendMail:
+    path:     /sendMail
+    defaults: { _controller: umespaUserBundle:AlunoController:sendMail } 

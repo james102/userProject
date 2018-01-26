@@ -17,7 +17,7 @@ class TempType extends AbstractType
         $builder
             ->add('nome')
             ->add('email')
-            ->add('senha')
+            ->add('senha','password')
         ;
     }
     

@@ -9,9 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
+
 use umespa\UserBundle\Entity\Temp;
 use umespa\UserBundle\Form\TempType;
-//http://www.linhadecodigo.com.br/artigo/3602/crop-jquery-recortando-imagens-com-jcrop.aspx
+//http://www.linhadecodigo.com.br/artigo/3602/crop-jquery-recortando-imagens-com-jcrop.aspx imagem recorte
 class AlunoControllerController extends Controller
 {
 
@@ -32,7 +33,7 @@ class AlunoControllerController extends Controller
     public function GeraFormTemp(Temp $entity)//cria forma no twig
     {
         $form = $this->createForm(new TempType(),$entity,array(
-            'action'=>$this->generateUrl('umespa_trataDadosTemp'),
+            'action'=>$this->generateUrl('umespa_sendMail'),//umespa_trataDadosTemp
             'method'=>'POST'
         ));
         return $form;
@@ -40,16 +41,62 @@ class AlunoControllerController extends Controller
 
    public function trataDadosAction(Request $request)
    {
-    $temp = new Temp();
-    $form = $this->GeraFormTemp($temp);
-    $form->handleRequest($request);
-    $nome=$form->get('nome')->getData();
-    return new Response($nome);
+     $temp = new Temp();
+     $form = $this->GeraFormTemp($temp);
+     $form->submit($request);
+     $emailForm=$form->get('email')->getData();
+     echo sprintf("%s\n", $emailForm);
+
+    $productRepository = $this->getDoctrine()->getRepository('umespaUserBundle:Temp');
+    $products = $productRepository->findAll();
+  
+   
+       foreach ($products as $product)
+        {
+            $emailTemp=$product->getEmail();
+           // echo sprintf("%s\n", $nome);
+            if($emailTemp !=$emailForm)
+            {
+               //echo sprintf("%s\n", $product->getEmail());
+               return new  Response('envia email para confirmaçao ');
+               //exit();
+            }else{
+                return new  Response('email ja existe');
+            }
+        }
+    return new Response('Erro:200');
    }
 
 
 
+   public function sendMailAction()
+   {
+    $mailLogger = new \Swift_Plugins_Loggers_ArrayLogger();
+   
 
+    $transport =  \Swift_SmtpTransport::newInstance()
+    ->setHost('smtp.umespa.com.br')    
+    ->setUsername('dev@umespa.com.br')
+    ->setPassword('0o9i8uas');
+    $mailler = \Swift_Mailer::newInstance($transport);
+    $mailler->registerPlugin(new \Swift_Plugins_LoggerPlugin($mailLogger));
+    $message = \Swift_Message::newInstance()
+    ->setSubject('hello')
+    ->setFrom('dev@umespa.com.br')
+    ->setTo('cavalcante02@gmail.com')
+    ->setBody('ola mundo');
+    if($mailler->send($message))
+    {
+        echo "messgem enviada";
+    }
+    else{
+        echo 'messagem nao enviada';
+    }
+
+   
+      // return $this->render(...);
+      return new  Response('email ja existe');
+   }
 
     public function emitirCarteirinhaAction()
     {
@@ -70,10 +117,7 @@ class AlunoControllerController extends Controller
 
         return $form;
     }
-private function getIdate($time_inicial,$data_final)
-{
 
-}
     public function checaIdadeAction(Request $request)
     {
         $aluno = new Aluno();

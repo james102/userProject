@@ -9,43 +9,47 @@
 						
 						<div class="row" id="email-account-container">
 							<!--form id="form-registra" name="form-registra" class="loginItems" action="#" method="post" novalidate="novalidate"-->
-					  {{ form_start(form, { 'attr' : { 'novalidate': 'novalidate', 'r0ole' : 'form'} }) }}
+					  {{ form_start(form, { 'attr' : { 'novalidate': 'novalidate'}})}}
                          {% if (page !='login') %}
                             <div class="form-group col-xs-9">
-								  <label class="control-label col-sm-3 hidden-xs" for="nome">NOME:</label>
+								  <label class="control-label col-sm-3 hidden-xs" >NOME:</label>
 								  <div class="col-sm-9 col-xs-9">
 									<!--input id="nome" name="nome" minlength="6" placeholder="Nome Completo" class="form-control" required="true" type="text" value="" maxlength="80" aria-required="true"-->
 									   {{ form_widget(form.nome, { 'attr' : {'class' : 'form-control', 'placeholder' : 'Nome Completo'} }) }}
+									    <span class="text-danger">{{ form_errors(form.nome) }}</span>
 									
 								  </div>
 							</div>
                           {% endif %}  
 							<div class="form-group  col-xs-9">
-								<label class="control-label col-sm-3 hidden-xs" for="email">E-MAIL:</label>
+								<label class="control-label col-sm-3 hidden-xs" >E-MAIL:</label>
 								<div class="col-sm-9  col-xs-9">
 								<!--input id="email" name="email" mailcustom="true" uniqueemail="true" placeholder="E-mail" data-url-validation="/usuario/email-validacao/" class="form-control" required="true" type="text" value="" maxlength="64" aria-required="true"-->
 								   {{ form_widget(form.email, { 'attr' : {'class' : 'form-control', 'placeholder' : 'E-mail'} }) }}
+								    <span class="text-danger">{{ form_errors(form.email) }}</span>
 							    
 								</div>
 							</div>
 							  <div class="form-group col-xs-9">
-								  <label class="control-label col-sm-3 hidden-xs" for="senha">SENHA:</label>
+								  <label class="control-label col-sm-3 hidden-xs">SENHA:</label>
 								  <div class="col-sm-9  col-xs-9">
 							  <!--input id="senha" name="senha" minlength="6" placeholder="Senha" type="password" class="form-control" required="true" value="" maxlength="20" aria-required="true"-->
 							     {{ form_widget(form.senha, { 'attr' : {'class' : 'form-control', 'placeholder' : 'Senha'} }) }}
+								  <span class="text-danger">{{ form_errors(form.senha) }}</span>
 							  
 								  </div>
 							</div>
 								
 								<div class="form-group col-xs-9">
-									<label class="control-label col-sm-3 hidden-xs"></label>
-							  <div class="form-group col-sm-9 col-xs-12 submit-container">  <button type="submit" id="btn-cadastro" class="btn btn-success btn-lg">{{ nome }}</button>
-                            {% if (page !='login') %}
+								 <label class="control-label col-sm-3 hidden-xs"></label>
+							     <div class="form-group col-sm-9 col-xs-12 submit-container"> 
+							       <button type="submit" id="btn-cadastro" class="btn btn-success btn-lg">{{ nome }}</button>
+                                   {% if (page !='login') %}
+							        <h4>Já possui um cadastro? Faça o <a href="/criaConta/login">Login</a></h4>
+                                   {% endif %}
+                                 </div>
+							    </div>
 
-							<h4>Já possui um cadastro? Faça o <a href="/criaConta/login">Login</a></h4>
-                            {% endif %}
-                              </div>
-							</div>
 							<div>
 </div></form>
 						</div>
@@ -53,5 +57,5 @@
 				
 				</div>
 				</div>
-
+ {{ form_end(form) }}
 {% endblock %}
