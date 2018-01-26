@@ -77,7 +77,7 @@ class AlunoControllerController extends Controller
     $transport =  \Swift_SmtpTransport::newInstance()
     ->setHost('smtp.umespa.com.br')    
     ->setUsername('dev@umespa.com.br')
-    ->setPassword('0o9i8uas');
+    ->setPassword('*****');
     $mailler = \Swift_Mailer::newInstance($transport);
     $mailler->registerPlugin(new \Swift_Plugins_LoggerPlugin($mailLogger));
     $message = \Swift_Message::newInstance()
