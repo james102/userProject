@@ -11,13 +11,14 @@ class TempType extends AbstractType
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
-     */
+        */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('nome')
             ->add('email')
             ->add('senha','password')
+         
         ;
     }
     

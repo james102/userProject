@@ -33,7 +33,7 @@ class AlunoControllerController extends Controller
     public function GeraFormTemp(Temp $entity)//cria forma no twig
     {
         $form = $this->createForm(new TempType(),$entity,array(
-            'action'=>$this->generateUrl('umespa_sendMail'),//umespa_trataDadosTemp
+            'action'=>$this->generateUrl('umespa_trataDadosTemp'),//umespa_trataDadosTemp
             'method'=>'POST'
         ));
         return $form;
@@ -45,49 +45,58 @@ class AlunoControllerController extends Controller
      $form = $this->GeraFormTemp($temp);
      $form->submit($request);
      $emailForm=$form->get('email')->getData();
-     echo sprintf("%s\n", $emailForm);
+    // echo sprintf("%s\n", $emailForm);
 
     $productRepository = $this->getDoctrine()->getRepository('umespaUserBundle:Temp');
     $products = $productRepository->findAll();
   
-   
+   $envio;
        foreach ($products as $product)
         {
             $emailTemp=$product->getEmail();
-           // echo sprintf("%s\n", $nome);
-            if($emailTemp !=$emailForm)
+           // echo sprintf("%s\n", $emailTemp);
+            if($emailTemp != $emailForm)
             {
-               //echo sprintf("%s\n", $product->getEmail());
-               return new  Response('envia email para confirmaçao ');
-               //exit();
+              // echo sprintf("%s\n", $product->getEmail());
+              $envio=  $this->sendMailAction($emailForm);
+              if($envio==1){
+               // echo sprintf("%s\n",$envio);               
+              return $this->render('umespaUserBundle:AlunoController:verificaEmail.html.twig', array('email'=>$emailForm));
+            }
+             
             }else{
-                return new  Response('email ja existe');
+                return new  Response('email ja existe');//cria messagem para informar que o email ja existe e um botao para voltar 
             }
         }
-    return new Response('Erro:200');
+        return new  Response('email ja existe');
    }
 
 
 
-   public function sendMailAction()
+   public function sendMailAction($email)
    {
-    $mailLogger = new \Swift_Plugins_Loggers_ArrayLogger();
-   
+    $mailLogger = new \Swift_Plugins_Loggers_ArrayLogger();  
 
-    $transport =  \Swift_SmtpTransport::newInstance()
+    $transport =  \Swift_SmtpTransport::newInstance()//ao criar uma nova instancia desconcidera as configuraçoew dos  parametros 
     ->setHost('smtp.umespa.com.br')    
-    ->setUsername('dev@umespa.com.br')
-    ->setPassword('*****');
+   ->setUsername('dev@umespa.com.br')
+   ->setPassword('0o9i8uas');
+  // echo sprintf("%s\n", $email);
     $mailler = \Swift_Mailer::newInstance($transport);
     $mailler->registerPlugin(new \Swift_Plugins_LoggerPlugin($mailLogger));
     $message = \Swift_Message::newInstance()
     ->setSubject('hello')
     ->setFrom('dev@umespa.com.br')
-    ->setTo('cavalcante02@gmail.com')
+    ->setTo($email)
     ->setBody('ola mundo');
+
+return $mailler->send($message);
+/*
     if($mailler->send($message))
     {
-        echo "messgem enviada";
+       // echo 'messagem nao enviada';
+      //  return $this->render('umespaUserBundle:AlunoController:Index.html.twig');
+      //  exit();
     }
     else{
         echo 'messagem nao enviada';
@@ -95,7 +104,7 @@ class AlunoControllerController extends Controller
 
    
       // return $this->render(...);
-      return new  Response('email ja existe');
+      return new  Response('email ja existe');*/
    }
 
     public function emitirCarteirinhaAction()

@@ -1,0 +1,21 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}umespaUserBundle:AlunoController:Index{% endblock %}
+
+{% block body %}
+{{parent()}}
+<div class="container" style="margin-top: 101px;">        
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="text-center">
+            <h3>Verificação de E-mail</h3>
+            <p class="padding-top-30"><span class="text-danger">Seu e-mail <b>{{email}}</b> ainda não foi confirmado</span>. Você recebeu um e-mail com um link para realizar essa verificação.</p>
+            <!--p>Caso não tenha recebido o e-mail <a href="#">clique aqui</a> para enviar novamente.</p-->
+            <!--p>Caso você esteja com dificuldade nessa confirmação entre em contato conosco <a href="/trataDados">por e-mail</a> ou pelo telefone: (94) 3356-0000</p-->
+        </div>
+    </div>
+</div>
+
+    </div>
+{% endblock %}
+
