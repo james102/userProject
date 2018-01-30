@@ -24,3 +24,8 @@ umespa_checaIdade:
 umespa_sendMail:
     path:     /sendMail
     defaults: { _controller: umespaUserBundle:AlunoController:sendMail } 
+
+#rota para test de paginas
+umespa_test:
+    path:     /test
+    defaults: { _controller: umespaUserBundle:AlunoController:test }     

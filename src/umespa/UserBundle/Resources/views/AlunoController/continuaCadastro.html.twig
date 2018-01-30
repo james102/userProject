@@ -1,0 +1,149 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}umespaUserBundle:AlunoController:Continua Cadastro{% endblock %}
+
+{% block body %}
+{{parent()}}
+<div class="titulo">   
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 page-header">
+                <h3> Preenchimento de Dados</h3>
+            </div>
+        </div>
+    </div>
+    <div class="form-cadastro row">
+    {# <div class="col-md-6">
+        <div class="row">
+            <div class="cart col-md-8 col-md-offset-2">
+                <div id="cart-button" class="">
+                    <button type="button" class="btn btn-grey" data-toggle="modal" data-target="#captureModal" data-picture="foto|picture">Enviar Foto</button>
+                                    </div>
+                <div id="cart-picture" class="collapse">
+                                        <img src="" id="picture" alt="Clique para trocar a foto" data-toggle="modal" data-target="#captureModal" data-picture="foto|picture">
+                                    </div>
+                <div id="cart-nome">ibones cavalcante</div>
+                <div id="cart-instituicao"></div>
+                <div id="cart-curso"></div>
+                <div id="cart-nascimento"></div>
+                <div id="cart-rg"></div>
+                <div id="cart-cpf"></div>
+                <div id="cart-matricula"></div>
+                <div id="cart-validade">Março/2019</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 padding-top-15 cart-text-alert">
+                <p class="text-left small"><span class="glyphicon glyphicon-alert text-danger"></span> É importante que seu rosto esteja completamente visivel, nítido e sem a presença de acessórios, efeitos de edição ou outros indivíduos.</p>
+            </div>
+        </div>
+    </div> #}
+    <div class="container">
+    <div class=" col-md-6">
+        <form action="/formulario/public/aluno/cadastro" id="formCadastro" method="post" autocomplete="off" enctype="application/x-www-form-urlencoded">
+         
+                        <div class="row">
+                        <div class="col-md-10 form-group">
+                    {# <label for="nome" class="control-label">Nome</label> #}
+                    <input type="text" class="form-control" name="nome" id="nome" value="ibones cavalcante"placeholder="nome">
+                                    </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-5 form-group">
+                    <input type="text" class="form-control" name="nascimento" id="nascimento" value="" placeholder="Data de Nasc">
+                </div>
+          
+                <div class="col-md-5 form-group">
+                    {# <label for="cpf" class="control-label">CPF</label> #}
+                    <input type="text" class="form-control" name="cpf" id="cpf" value=""placeholder="CPF">
+                </div>
+             </div>
+
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    {# <label for="rg">RG</label> #}
+                    <input type="text" class="form-control" name="rg" id="rg" value=""placeholder="RG">
+                                    </div>
+                <div class="col-md-3 form-group">
+                    {# <label for="orgao" class="control-label">Órgão Expedidor</label> #}
+                    <input type="text" class="form-control" name="orgao" id="orgao" value=""placeholder="Órgão">
+                </div>
+                <div class="col-md-4 form-group">
+                    {# <label for="uf" class="control-label">UF</label> #}
+                                        <input type="text" class="form-control" name="uf" id="uf" value=""placeholder="UF">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 form-group">
+                    {# <label for="celular" class="control-label">Celular</label> #}
+                    <div class="input-group">
+                        
+                        {# <span class="input-group-addon"></span> #}
+                        <input type="text" class="form-control" name="celular" id="celular" value=""placeholder="Celular">
+                    </div>
+                                    </div>
+                <div class="col-md-5 form-group">
+                    {# <label for="telefone" class="control-label">Telefone</label> #}
+                    <div class="input-group">
+                        
+                        {# <span class="input-group-addon"></span> #}
+                        <input type="text" class="form-control" name="telefone" id="telefone" value=""placeholder="Fone">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    {# <label for="estado" class="control-label">Estado</label> #}
+                                            <input type="text" class="form-control" name="estado" id="estado" value=""placeholder="estado">
+
+                     
+                </div>
+                <div class="col-md-6 form-group">
+                    {# <label for="cidade" class="control-label">Cidade</label> #}
+                     <input type="text" class="form-control" name="cidade" id="cidade" value=""placeholder="cidade">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 form-group">
+                    {# <label for="escolaridade" class="control-label">Nível de Ensino</label> #}
+                    <select class="form-control" name="escolaridade" id="escolaridade" value="">
+                        <option value=""placeholder="Escolaridade">Escolaridade</option>
+                        <option value="F">Ensino Fundamental</option>
+                        <option value="M">Ensino Médio</option>
+                        <option value="T">Ensino Técnico</option>                                                                                                                                                                                                                                                                    </select>
+                </div>
+                                    
+                <div class="col-md-6 form-group">
+                    {# <label for="instituicao-selectized" class="control-label">Instituição</label> #}
+                                         <input type="text" class="form-control" name="cidade" id="Instituicao" value=""placeholder="Instituição">
+
+                </div>
+
+                {# <div class="form-group col-md-2 collapse" id="loading" style="display: none;">
+                    <img src="https://www.centraldesolicitacoes.com.br/formulario/public/imgs/loading.gif" alt="Carregando dados">
+                </div> #}
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    {# <label for="matricula" class="control-label">Matrícula</label> #}
+                    <input type="text" class="form-control" name="matricula" id="matricula" value=""placeholder="Matrícula">
+                                    </div>
+                <div class="col-md-7 form-group">
+                    {# <label for="curso" class="control-label">Curso</label> #}
+                    <input type="text" class="form-control" name="curso" id="curso" value=""placeholder="Curso">
+                    <small class="pull-right">Informação para Ensino Técnico e Superior</small>
+                                    </div>
+            </div>
+
+            <div class="row padding-top-15">
+                <div class="col-md-8 col-md-offset-3">
+                    <button type="button" class="btn btn-success btn-lg" id="continuar">Continuar <span class="glyphicon glyphicon-triangle-right"></span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+    {% endblock %}

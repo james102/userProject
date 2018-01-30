@@ -15,7 +15,10 @@ use umespa\UserBundle\Form\TempType;
 //http://www.linhadecodigo.com.br/artigo/3602/crop-jquery-recortando-imagens-com-jcrop.aspx imagem recorte
 class AlunoControllerController extends Controller
 {
-
+public function testAction()
+{
+    return $this->render('umespaUserBundle:AlunoController:continuaCadastro.html.twig');
+}
  public function criaContaAction($cad)
     {
         $buttonNome ='Logar';
@@ -45,6 +48,8 @@ class AlunoControllerController extends Controller
      $form = $this->GeraFormTemp($temp);
      $form->submit($request);
      $emailForm=$form->get('email')->getData();
+     $nome=$form->get('nome')->getData();
+
     // echo sprintf("%s\n", $emailForm);
 
     $productRepository = $this->getDoctrine()->getRepository('umespaUserBundle:Temp');
@@ -58,7 +63,7 @@ class AlunoControllerController extends Controller
             if($emailTemp != $emailForm)
             {
               // echo sprintf("%s\n", $product->getEmail());
-              $envio=  $this->sendMailAction($emailForm);
+              $envio=  $this->sendMailAction($emailForm, $nome);
               if($envio==1){
                // echo sprintf("%s\n",$envio);               
               return $this->render('umespaUserBundle:AlunoController:verificaEmail.html.twig', array('email'=>$emailForm));
@@ -73,7 +78,7 @@ class AlunoControllerController extends Controller
 
 
 
-   public function sendMailAction($email)
+   public function sendMailAction($email,$nome)
    {
     $mailLogger = new \Swift_Plugins_Loggers_ArrayLogger();  
 
@@ -88,7 +93,10 @@ class AlunoControllerController extends Controller
     ->setSubject('hello')
     ->setFrom('dev@umespa.com.br')
     ->setTo($email)
-    ->setBody('ola mundo');
+    ->setCharset('UTF-8')   	
+    ->setContentType("text/html")
+   // ->setBody('<p>	<a class="btn btn-success btn-lg" href="http://localhost:8000/criaConta/Login">Verificar E-mail</a></p>');
+    ->setBody( $this->renderView('umespaUserBundle:AlunoController:confirma.html.twig',  array('nome' => $nome),'text/html'));
 
 return $mailler->send($message);
 /*

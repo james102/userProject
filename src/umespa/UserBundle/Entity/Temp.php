@@ -41,7 +41,12 @@ class Temp
      * @ORM\Column(name="senha", type="string", length=100)
      */
     private $senha;
-
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="confirma", type="string", length=20)
+     */
+    private $confirma;
 
     /**
      * Get id
@@ -120,5 +125,28 @@ class Temp
     public function getSenha()
     {
         return $this->senha;
+    }
+
+    /**
+     * Set confirma
+     *
+     * @param string $confirma
+     * @return Temp
+     */
+    public function setConfirma($confirma)
+    {
+        $this->confirma = $confirma;
+
+        return $this;
+    }
+
+    /**
+     * Get confirma
+     *
+     * @return string 
+     */
+    public function getConfirma()
+    {
+        return $this->confirma;
     }
 }
