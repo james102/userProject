@@ -1,0 +1,152 @@
+ {% extends 'layout.html.twig' %}
+
+{% block title %}umespaUserBundle:AlunoController:Envio de documentos{% endblock %}
+
+{% block body %}
+ {{ parent() }}
+<div class="titulo">   
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 page-header">
+                <h3>Envio de Documentos</h3>
+            </div>
+        </div>
+</div>
+
+<div class="container">
+ <form action="/formulario/public/aluno/documento" id="formDocumento" method="post" autocomplete="off" enctype="application/x-www-form-urlencoded">
+ <div class="panel panel-success">
+        <div class="panel-heading"><img src="" alt="">&nbsp;<b>Foto 3x4</b></div>
+        <div class="panel-body">
+        
+            <div class="row">
+
+                <div class="form-group col-md-5 text-center">
+                    <img id="imgComprovante" class="documento thumbnail "  width="150px" height="200px"src="http://2.bp.blogspot.com/-LtyWNElDw3I/UOyB85J-EnI/AAAAAAAADYQ/mwQOjRwafrE/s1600/253x4.jpg"><br>
+                    <textarea id="comprovante" name="comprovante" class="hidden"></textarea>
+                    <input type="file" id="fileComprovante" accept="image/jpeg" style="display: none" onchange="getFile(this.files[0], 'imgComprovante', 'comprovante')">
+                    <label for="fileComprovante" class="btn btn-success">Enviar Arquivo</label><br><br>
+                </div>
+                <div class="form-group col-md-2 text-center"></div>
+
+                <div class="form-group col-md-5">
+                    <ul class="list-group">
+                    <dt>Foto no tamanho 3x4</dt>
+                    {# <li>Atestado de Matrícula</li>
+                    <li>Atestado de Frequência</li>
+                    <li>Boleto Bancário da Instituição</li> #}
+                    </ul>
+                    <p><span class="glyphicon glyphicon-alert text-danger"></span> São aceitos somente arquivos no formato JPEG/JPG</p>
+                </div>
+
+            </div>
+        </div>
+    </div>  
+     <div class="panel panel-success">
+        <div class="panel-heading"><img src="" alt="">&nbsp;<b>Comprovação de Situação Estudantil</b></div>
+        <div class="panel-body">
+            <div class="row">
+
+                <div class="form-group col-md-5 text-center">
+                    <img id="imgComprovante" class="documento thumbnail " src="https://www.centraldesolicitacoes.com.br/formulario/public/imgs/modelo_matricula.jpg"><br>
+                    <textarea id="comprovante" name="comprovante" class="hidden"></textarea>
+                    <input type="file" id="fileComprovante" accept="image/jpeg" style="display: none" onchange="getFile(this.files[0], 'imgComprovante', 'comprovante')">
+                    <label for="fileComprovante" class="btn btn-success">Enviar Arquivo</label><br><br>
+                </div>
+                <div class="form-group col-md-2 text-center"></div>
+
+                <div class="form-group col-md-5">
+                    <ul class="list-group">
+                    <dt>Documentos Válidos:</dt>
+                    <li>Atestado de Matrícula</li>
+                    <li>Atestado de Frequência</li>
+                    <li>Boleto Bancário da Instituição</li>
+                    </ul>
+                    <p><span class="glyphicon glyphicon-alert text-danger"></span> São aceitos somente arquivos no formato JPEG/JPG</p>
+                </div>
+
+            </div>
+        </div>
+    </div>  
+
+    <div class="panel panel-success">
+        <div class="panel-heading"><img src="" alt="">&nbsp;<b>RG</b></div>
+        <div class="panel-body">
+            <div class="row">
+
+                <div class="form-group col-md-5 text-center">
+                    <img id="imgComprovante" class="documento thumbnail " width="300" height="104"src="http://agenciaherbo.com.br/wp-content/uploads/2013/06/modelo-RG.jpg"><br>
+                    <textarea id="comprovante" name="comprovante" class="hidden"></textarea>
+                    <input type="file" id="fileComprovante" accept="image/jpeg" style="display: none" onchange="getFile(this.files[0], 'imgComprovante', 'comprovante')">
+                    <label for="fileComprovante" class="btn btn-success">Enviar Arquivo</label><br><br>
+                </div>
+                <div class="form-group col-md-2 text-center"></div>
+
+                <div class="form-group col-md-5">
+                    <ul class="list-group">
+                    <dt>Copia do RG Frente e Verço</dt>
+                    {# <li>Atestado de Matrícula</li>
+                    <li>Atestado de Frequência</li>
+                    <li>Boleto Bancário da Instituição</li> #}
+                    </ul>
+                    <p><span class="glyphicon glyphicon-alert text-danger"></span> São aceitos somente arquivos no formato JPEG/JPG</p>
+                </div>
+
+            </div>
+        </div>
+    </div>  
+     <div class="panel panel-success">
+        <div class="panel-heading"><img src="" alt="">&nbsp;<b>CPF</b></div>
+        <div class="panel-body">
+            <div class="row">
+
+                <div class="form-group col-md-5 text-center">
+                    <img id="imgComprovante" class="documento thumbnail " width="300" height="104"src="https://documentosonline.files.wordpress.com/2010/04/cpf-cartao.jpg"><br>
+                    <textarea id="comprovante" name="comprovante" class="hidden"></textarea>
+                    <input type="file" id="fileComprovante" accept="image/jpeg" style="display: none" onchange="getFile(this.files[0], 'imgComprovante', 'comprovante')">
+                    <label for="fileComprovante" class="btn btn-success">Enviar Arquivo</label><br><br>
+                </div>
+                <div class="form-group col-md-2 text-center"></div>
+
+                <div class="form-group col-md-5">
+                    <ul class="list-group">
+                    <dt>Copia Frente e Verço do CPF</dt>
+                    {# <li>Atestado de Matrícula</li>
+                    <li>Atestado de Frequência</li>
+                    <li>Boleto Bancário da Instituição</li> #}
+                    </ul>
+                    <p><span class="glyphicon glyphicon-alert text-danger"></span> São aceitos somente arquivos no formato JPEG/JPG</p>
+                </div>
+
+            </div>
+        </div>
+    </div>  
+
+     <div class="panel panel-success">
+        <div class="panel-heading"><img src="" alt="">&nbsp;<b>Comprovante de Residência</b></div>
+        <div class="panel-body">
+            <div class="row">
+
+                <div class="form-group col-md-5 text-center">
+                    <textarea id="comprovante" name="comprovante" class="hidden"></textarea>
+                    <input type="file" id="fileComprovante" accept="image/jpeg" style="display: none" onchange="getFile(this.files[0], 'imgComprovante', 'comprovante')">
+                    <label for="fileComprovante" class="btn btn-success">Enviar Arquivo</label><br><br>
+                </div>
+                <div class="form-group col-md-2 text-center"></div>
+
+                <div class="form-group col-md-5">
+                    <ul class="list-group">
+                    <dt>Documentos Válidos:</dt>
+                    <li>Conta de Luz</li>
+                    <li>Conta de Água</li>
+                    <li>Conta de Telefone</li>
+                    </ul>
+                    <p><span class="glyphicon glyphicon-alert text-danger"></span> São aceitos somente arquivos no formato JPEG/JPG/PDF</p>
+                </div>
+
+            </div>
+        </div>
+    </div>  
+    </form>
+</div>      
+ 
+    {% endblock %}

@@ -17,7 +17,7 @@ class AlunoControllerController extends Controller
 {
 public function testAction()
 {
-    return $this->render('umespaUserBundle:AlunoController:continuaCadastro.html.twig');
+    return $this->render('umespaUserBundle:AlunoController:enviaDocumentos.html.twig');
 }
  public function criaContaAction($cad)
     {
