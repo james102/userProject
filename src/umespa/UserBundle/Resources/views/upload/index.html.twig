@@ -1,0 +1,43 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}umespaUserBundle:upload:index{% endblock %}
+   {% block stylesheets %}
+           <link rel="stylesheet"  href="{{ asset('public/css/style.css') }}"/>
+
+      {% endblock %}
+{% block body %}
+<div class="container">
+    <h1>Adiciona Imagem</h1>
+    {{ form_start(form) }}
+    {# ... #}
+
+    {{ form_row(form.arquivo) }}
+     {{ form_row(form.alunoid) }}
+    </br>
+       <button class="btn btn-large btn-primary" type="submit">Upload</button>
+    {{ form_end(form) }}
+
+  
+
+    <div class="progress progress-striped active">
+    <div class="progress-bar"  role="progressbar" aria-valuenow="0" aria-valuemin="0"  aria-valuemax="100" style="width: 50%">
+    <span class="sr-only">0% Complete</span>
+    </div>
+    </div>
+    <div class="image">
+    </div>
+    </div>
+</div>
+{% endblock %}
+
+   {% block javascripts %}
+   {# <script src="public/js/script.js"></script> #}
+   <script src=" {{ asset('public/js/script.js') }}"></script>
+      <script src=" {{ asset('public/js/File.js') }}"></script>
+
+      {% endblock %}
+{# <form class="form" method ="POST" enctype="multipart/form-data" action="">
+<h2 class="form-signin-headling">Upload</h2>
+<input type="file" name="img">
+<button class="btn btn-large btn-primary" type="submit">Upload</button>
+</form> #}

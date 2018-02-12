@@ -29,3 +29,7 @@ umespa_sendMail:
 umespa_test:
     path:     /test
     defaults: { _controller: umespaUserBundle:AlunoController:test }     
+    
+index:
+    path:     /index
+    defaults: { _controller: umespaUserBundle:upload:index }

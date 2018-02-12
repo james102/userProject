@@ -3,10 +3,20 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}UMESPA - {% endblock %}</title>
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ asset('public/css/style.css') }}" >
+	<Script src="http://code.jquery.com/jquery-2.1.1-rc2.min.js" ></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
+	<script src="{{ asset('public/js/script.js') }}"></script>
+
         {% block stylesheets %}
-        <link rel="stylesheet"  href="{{ asset('public/css/style.css') }}"/>
+        
+        {# <link rel="stylesheet"  href="{{ asset('public/css/style.css') }}"/> #}
         <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}"/>
-         <link rel="stylesheet" href="{{ asset('public/css/bootstrap-theme.min') }}"/>
+        <link rel="stylesheet" href="{{ asset('public/css/bootstrap-theme.min') }}"/>
+        <link rel="stylesheet" href="{{ asset('public/css/style.css') }}"/>
+
           {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
       
@@ -15,7 +25,7 @@
         {% block body %}
         {{include('menuini.html.twig')}}
 
-        {{include('menu.html.twig')}}
+        {# {{include('menu.html.twig')}} #}
         {% endblock %}
        
         {% block javascripts %}
@@ -27,7 +37,10 @@
         
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
      <script src="http://getbootstrap.com/docs/3.3/dist/js/bootstrap.min.js"></script> 
-     
+     {# progress #}
+     <script src="http://malsup.github.com/jquery.form.js"></script> 
+    <Script src="http://code.jquery.com/jquery-2.1.1-rc2.min.js" ></script>
+
 
         {% endblock %}
     </body>
