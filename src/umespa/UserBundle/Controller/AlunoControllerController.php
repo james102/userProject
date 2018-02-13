@@ -15,12 +15,15 @@ use umespa\UserBundle\Form\TempType;
 //http://www.linhadecodigo.com.br/artigo/3602/crop-jquery-recortando-imagens-com-jcrop.aspx imagem recorte
 class AlunoControllerController extends Controller
 {
-public function testAction()
-{
-    return $this->render('umespaUserBundle:AlunoController:leidameiaentrada.html.twig');
-}
- public function criaContaAction($cad)
+    public function testAction()
     {
+        return $this->render('umespaUserBundle:AlunoController:leidameiaentrada.html.twig');
+    }
+    
+
+    public function criaContaAction($cad)
+    {
+        //echo($cad);
         $buttonNome ='Logar';
 
       if( $cad !='login' )
@@ -29,31 +32,85 @@ public function testAction()
         }     
 
        $temp = new Temp();
-       $form = $this->GeraFormTemp($temp);    
-        return $this->render('umespaUserBundle:AlunoController:criaConta.html.twig',array('page'=>$cad,'nome'=> $buttonNome,'form' => $form->createView()));   
+       $form = $this->GeraFormTemp($temp);        
+
+        return $this->render('umespaUserBundle:AlunoController:criaConta.html.twig',array(
+            'erro'=>'',
+            'page'=>$cad,
+            'nome'=> $buttonNome,
+            'form' => $form->createView()));   
     }
+
+    // public function loginAction()
+    // {
+    //   echo('efetuar Login');die;
+    //    $temp = new Temp();
+    //    $form = $this->GeraFormTemp($temp);    
+    //     return $this->render('umespaUserBundle:AlunoController:criaConta.html.twig',array('page'=>$cad,'nome'=> $buttonNome,'form' => $form->createView()));   
+    // }
+
+
 
     public function GeraFormTemp(Temp $entity)//cria forma no twig
     {
-        $form = $this->createForm(new TempType(),$entity,array(
+        $form = $this->createForm(new TempType(),
+        $entity,
+        array(
             'action'=>$this->generateUrl('umespa_trataDadosTemp'),//umespa_trataDadosTemp
             'method'=>'POST'
         ));
+
         return $form;
     }
-
+#https://tableless.com.br/manipulando-arquivos-carregados-por-upload-no-laravel/
    public function trataDadosAction(Request $request)
    {
      $temp = new Temp();
      $form = $this->GeraFormTemp($temp);
      $form->submit($request);
+
+     //print_r($form);
+     $r = $this->getRequest();
+     $port=$r->getPort();  
+     $host=$r->getHost()  ;
+     $url=$host.':'.$port.'/lumespa_login';
+    // echo($url);die;
+
      $emailForm=$form->get('email')->getData();
      $nome=$form->get('nome')->getData();
+     $senha=$form->get('senha')->getData();
+    
+     //echo($emailForm);
+    //echo sprintf("%s\n", $emailForm);
 
-    // echo sprintf("%s\n", $emailForm);
+    $tempRepository = $this->getDoctrine()->getRepository('umespaUserBundle:Temp');
 
-    $productRepository = $this->getDoctrine()->getRepository('umespaUserBundle:Temp');
-    $products = $productRepository->findAll();
+    $email = $tempRepository->findOneBy(['email' => $emailForm]);
+    
+    if($email){
+       // print_r($email);die;
+      // echo('Email ja esta em uso!');
+       return $this->render('umespaUserBundle:AlunoController:criaConta.html.twig',array(
+           'erro'=>'Email ja esta em uso!',
+           'page'=>'Criar Conta',
+           'nome'=> 'Criar Conta',
+           'form' => $form->createView())); 
+    }else{
+
+
+        $envio=  $this->sendMailAction($emailForm, $nome);
+              if($envio==1){
+               // echo sprintf("%s\n",$envio);               
+              return $this->render('umespaUserBundle:AlunoController:verificaEmail.html.twig', array(                
+                  'email'=>$emailForm
+                ));
+              }
+    }
+    
+die;
+
+    $temp = $tempRepository->findAll();
+    //print_r(''));die;
   
    $envio;
        foreach ($products as $product)
@@ -78,6 +135,9 @@ public function testAction()
 
 
 
+
+
+
    public function sendMailAction($email,$nome)
    {
     $mailLogger = new \Swift_Plugins_Loggers_ArrayLogger();  
@@ -87,6 +147,7 @@ public function testAction()
    ->setUsername('dev@umespa.com.br')
    ->setPassword('0o9i8uas');
   // echo sprintf("%s\n", $email);
+
     $mailler = \Swift_Mailer::newInstance($transport);
     $mailler->registerPlugin(new \Swift_Plugins_LoggerPlugin($mailLogger));
     $message = \Swift_Message::newInstance()
@@ -96,7 +157,9 @@ public function testAction()
     ->setCharset('UTF-8')   	
     ->setContentType("text/html")
    // ->setBody('<p>	<a class="btn btn-success btn-lg" href="http://localhost:8000/criaConta/Login">Verificar E-mail</a></p>');
-    ->setBody( $this->renderView('umespaUserBundle:AlunoController:confirma.html.twig',  array('nome' => $nome),'text/html'));
+    ->setBody( $this->renderView('umespaUserBundle:AlunoController:confirma.html.twig',  array(     
+        'nome' => $nome),
+        'text/html'));
 
 return $mailler->send($message);
 /*

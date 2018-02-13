@@ -9,6 +9,16 @@ umespa_index:
 umespa_criaConta:
     path:     /criaConta/{cad}
     defaults: { _controller: umespaUserBundle:AlunoController:criaConta } 
+#Fazer Login
+umespa_login:
+    path:     /login
+    defaults: { _controller: umespaUserBundle:AlunoController:login } 
+#confirma email     
+umespa_confirma:
+    path:     /confirma
+    defaults: { _controller: umespaUserBundle:AlunoController:confirma } 
+
+    
 umespa_trataDadosTemp:
     path:     /trataDados
     defaults: { _controller: umespaUserBundle:AlunoController:trataDados } 
