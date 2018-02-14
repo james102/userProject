@@ -1,16 +1,30 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-{# {{ parent() }} #}
+{{ parent() }}
 	<div  class="container" style="margin-top: 101px;">
+		{% for message in app.session.flashbag.get('notice') %}
+			<div class="alert alert-danger">
+			{{ message }}
+			</div>
+			{% endfor %}
+	 {# <span class="text-danger">{{ erro }}</span>  #}
 		<div class="panel panel-default">
-			{% if (page !='login') %}
+          {# {% set flashbag_notices = app.session.flashbag.get('notice')  %}
+		  {% for notice in flashbag_notices %}
+		  {{ notice}}
+		  {% endfor %} #}
+
+		
+ 			{% if (page !='login') %}
 			<div class="panel-heading">
 			<h2>Ainda não possui cadastro?</h2>
-			 <span class="text-danger">{{ erro }}</span> 
+			
 			</div>
 			{% else %}
-			<div class="panel-heading"><h2>Login</h2></div>
+			<div class="panel-heading"><h2>Login</h2>
+			
+			</div>
 			{% endif %}
 			<div class="box-form panel-body">
 				<div class="row">
@@ -49,8 +63,9 @@
 						<div class="form-group col-xs-9">
 							<div class="col-sm-9  col-xs-9">
 								{% if (page !='login') %}
-								  <input id="confirma" name="confirma" minlength="6" placeholder="Comfirma" type="password" class="form-control" 
-								  required="true" value="" maxlength="20" aria-required="true">
+									{{ form_widget(form.confirma, { 'attr' : {'class' : 'form-control', 'placeholder' : 'Confirma'} }) }}
+								  {# <input id="confirma" name="confirma" minlength="6" placeholder="Comfirma" type="password" class="form-control"  #}
+								  {# required="true" value="" maxlength="20" aria-required="true"> #}
 								{% endif %}
 							</div>
 						</div>
@@ -60,13 +75,13 @@
 							<div class="form-group col-sm-9 col-xs-12 submit-container"> 
 								<button type="submit" id="btn-cadastro" class="btn btn-success btn-lg">{{ nome }}</button>
 								{% if (page !='login') %}
-									<h4>Já possui um cadastro? Faça o <a href="#">Login</a></h4>
+									<h4>Já possui um cadastro? Faça o <a href="{{path('umespa_criaConta',{'cad':'login'})}}">Login</a></h4>
 									{# {{path('umespa_criaConta',{'cad':'login'})}} #}
 								{% endif %}
 							</div>
 						</div>
 					
-					{# {{ form_end(form) }} #}
+					{{ form_end(form) }}
 				</div>
 			</div>
 		</div>

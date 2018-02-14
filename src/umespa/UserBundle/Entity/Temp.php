@@ -1,6 +1,8 @@
 <?php
 
 namespace umespa\UserBundle\Entity;
+use Symfony\Component\Security\Core\User\UserInterface; //cript
+use Symfony\Component\Security\Core\User\AdvancedUserInterface; //cript
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="umespa\UserBundle\Entity\TempRepository")
  */
-class Temp
+class Temp implements UserInterface
 {
     /**
      * @var integer
@@ -136,6 +138,10 @@ class Temp
     public function setConfirma($confirma)
     {
         $this->confirma = $confirma;
+        if($confirma !='1'){
+            $this->confirma = '0';
+        }
+       
 
         return $this;
     }
@@ -148,5 +154,26 @@ class Temp
     public function getConfirma()
     {
         return $this->confirma;
+    }
+//Securito cript
+    public function getRoles()
+    {
+
+    }
+    public function getSalt()
+    {
+      return null;
+    }
+    public function getPassword()
+    {
+      return null;
+    }
+    public function eraseCredentials()
+    {
+
+    }
+    public function getUsername()
+    {
+
     }
 }

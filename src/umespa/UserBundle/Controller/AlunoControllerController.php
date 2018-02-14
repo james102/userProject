@@ -8,6 +8,7 @@ use umespa\UserBundle\Entity\Aluno;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 use umespa\UserBundle\Entity\Temp;
@@ -17,9 +18,13 @@ class AlunoControllerController extends Controller
 {
     public function testAction()
     {
-        return $this->render('umespaUserBundle:AlunoController:leidameiaentrada.html.twig');
+        return $this->render('umespaUserBundle:AlunoController:addAluno.html.twig');
     }
     
+    public function confirmaAction($token)
+    {
+       return new Response($token);
+    }
 
     public function criaContaAction($cad)
     {
@@ -79,75 +84,60 @@ class AlunoControllerController extends Controller
      $emailForm=$form->get('email')->getData();
      $nome=$form->get('nome')->getData();
      $senha=$form->get('senha')->getData();
+     $senhaConf = $form->get('confirma')->getData();
+     
+    // $encoder = $this->container->get('security.password_encoder');
+    // print_r($encoder);die;
+  
+    // $encoded = $encoder->encodePassword($temp,$senha);
     
+    // echo($fileName);die;
      //echo($emailForm);
     //echo sprintf("%s\n", $emailForm);
 
     $tempRepository = $this->getDoctrine()->getRepository('umespaUserBundle:Temp');
-
-    $email = $tempRepository->findOneBy(['email' => $emailForm]);
-    
+    $email = $tempRepository->findOneBy(['email' => $emailForm]);    
     if($email){
        // print_r($email);die;
-      // echo('Email ja esta em uso!');
+      // echo('Email ja esta em uso!');   
+      $session=$this->get('session');
+      $session->getFlashBag()->add('notice', 'O email: '.$emailForm.' já esta em uso');
+    //  print_r($session);
        return $this->render('umespaUserBundle:AlunoController:criaConta.html.twig',array(
-           'erro'=>'Email ja esta em uso!',
+        //   'erro'=>'Email ja esta em uso!',
            'page'=>'Criar Conta',
            'nome'=> 'Criar Conta',
            'form' => $form->createView())); 
     }else{
-
-
+         
         $envio=  $this->sendMailAction($emailForm, $nome);
               if($envio==1){
-               // echo sprintf("%s\n",$envio);               
+               // echo sprintf("%s\n",$envio);    
+               //guarda os dados na tabela temporaria
+               $em = $this->getDoctrine()->getManager();
+               $md5Senha = md5($senha);
+               $temp->setSenha($md5Senha);
+              // echo($temp->getConfirma());die;
+               $em->persist($temp);
+               $em->flush();   
+
               return $this->render('umespaUserBundle:AlunoController:verificaEmail.html.twig', array(                
                   'email'=>$emailForm
                 ));
               }
     }
     
-die;
 
-    $temp = $tempRepository->findAll();
-    //print_r(''));die;
-  
-   $envio;
-       foreach ($products as $product)
-        {
-            $emailTemp=$product->getEmail();
-           // echo sprintf("%s\n", $emailTemp);
-            if($emailTemp != $emailForm)
-            {
-              // echo sprintf("%s\n", $product->getEmail());
-              $envio=  $this->sendMailAction($emailForm, $nome);
-              if($envio==1){
-               // echo sprintf("%s\n",$envio);               
-              return $this->render('umespaUserBundle:AlunoController:verificaEmail.html.twig', array('email'=>$emailForm));
-            }
-             
-            }else{
-                return new  Response('email ja existe');//cria messagem para informar que o email ja existe e um botao para voltar 
-            }
-        }
-        return new  Response('email ja existe');
-   }
-
-
-
-
-
+    }
 
    public function sendMailAction($email,$nome)
    {
     $mailLogger = new \Swift_Plugins_Loggers_ArrayLogger();  
-
-    $transport =  \Swift_SmtpTransport::newInstance()//ao criar uma nova instancia desconcidera as configuraçoew dos  parametros 
+    $token=md5($email);
+    $transport =  \Swift_SmtpTransport::newInstance()
     ->setHost('smtp.umespa.com.br')    
    ->setUsername('dev@umespa.com.br')
    ->setPassword('0o9i8uas');
-  // echo sprintf("%s\n", $email);
-
     $mailler = \Swift_Mailer::newInstance($transport);
     $mailler->registerPlugin(new \Swift_Plugins_LoggerPlugin($mailLogger));
     $message = \Swift_Message::newInstance()
@@ -156,26 +146,13 @@ die;
     ->setTo($email)
     ->setCharset('UTF-8')   	
     ->setContentType("text/html")
-   // ->setBody('<p>	<a class="btn btn-success btn-lg" href="http://localhost:8000/criaConta/Login">Verificar E-mail</a></p>');
     ->setBody( $this->renderView('umespaUserBundle:AlunoController:confirma.html.twig',  array(     
-        'nome' => $nome),
-        'text/html'));
+        'nome' => $nome,
+        'token'=>'http://localhost:8000/confirma/'.$token,
+        'text/html')));
 
-return $mailler->send($message);
-/*
-    if($mailler->send($message))
-    {
-       // echo 'messagem nao enviada';
-      //  return $this->render('umespaUserBundle:AlunoController:Index.html.twig');
-      //  exit();
-    }
-    else{
-        echo 'messagem nao enviada';
-    }
+       return $mailler->send($message);
 
-   
-      // return $this->render(...);
-      return new  Response('email ja existe');*/
    }
 
     public function emitirCarteirinhaAction()

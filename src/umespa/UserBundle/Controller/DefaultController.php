@@ -10,4 +10,9 @@ class DefaultController extends Controller
     {
         return $this->render('umespaUserBundle:Default:index.html.twig');
     }
+
+    public function leiDaMeiaEntradaAction()
+    {
+        return $this->render('umespaUserBundle:AlunoController:leidameiaentrada.html.twig');
+    }
 }

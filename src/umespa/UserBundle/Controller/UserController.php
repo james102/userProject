@@ -80,7 +80,8 @@ public function viewDescriptAction($userame)
         if($form->isValid())
         {
             $password = $form->get('password')->getData();//pega o password no post  
-             $encoder = $this->container->get('security.password_encoder');
+            
+            $encoder = $this->container->get('security.password_encoder');
             $encoded = $encoder->encodePassword($user,$password);
             $user->setPassword($encoded);
 

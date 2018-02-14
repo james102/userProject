@@ -18,6 +18,7 @@ class TempType extends AbstractType
             ->add('nome')
             ->add('email')
             ->add('senha','password')
+            ->add('confirma','password')
          
         ;
     }

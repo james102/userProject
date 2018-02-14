@@ -15,7 +15,7 @@ umespa_login:
     defaults: { _controller: umespaUserBundle:AlunoController:login } 
 #confirma email     
 umespa_confirma:
-    path:     /confirma
+    path:     /confirma/{token}
     defaults: { _controller: umespaUserBundle:AlunoController:confirma } 
 
     
@@ -43,3 +43,7 @@ umespa_test:
 index:
     path:     /index
     defaults: { _controller: umespaUserBundle:upload:index }
+
+umespa_links:
+    path:    /leiDaMeiaEntrada    
+    defaults: { _controller: umespaUserBundle:Default:leiDaMeiaEntrada }
