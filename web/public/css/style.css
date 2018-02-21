@@ -19,7 +19,7 @@
 
 /* Progress Tracker v2 */
 
-ol.progress[data-steps="2"] li {
+/* ol.progress[data-steps="2"] li {
 	width: 49%;
   }
   ol.progress[data-steps="3"] li {
@@ -86,7 +86,7 @@ ol.progress[data-steps="2"] li {
 	display: block;
 	background-color: silver;
 	height: 0.4em;
-	width: 50%;
+	width: 25%;
 	position: absolute;
 	bottom: 0.6em;
 	left: 0;
@@ -97,7 +97,7 @@ ol.progress[data-steps="2"] li {
 	display: block;
 	background-color: silver;
 	height: 0.4em;
-	width: 50%;
+	width: 25%;
 	position: absolute;
 	bottom: 0.6em;
 	right: 0;
@@ -119,4 +119,64 @@ ol.progress[data-steps="2"] li {
   .progress .done .step,
   .progress .active .step {
 	border: 3px solid yellowgreen;
-  }
+	} */
+	
+	/* progresso novo */
+	.one, .two, .three,.four{
+  position:absolute;
+	margin-top:-10px;
+	z-index:1;
+	height:40px;
+	width:40px;
+	border-radius:25px;
+	
+}
+
+
+.one{
+	left:0%;
+	text-align: center;	
+  color: white;
+	padding-top: 10px;
+	margin-bottom: 1em;
+}
+.two{
+	left:25%;
+	color: white;
+	text-align: center;
+	padding-top: 10px;
+	margin-bottom: 1em;
+}
+.three{
+	left:50%;
+	color: white;
+	text-align: center;
+	padding-top: 10px;
+	margin-bottom: 1em;
+}
+.four{
+	color: white;
+	left:73%;
+	text-align: center;
+	padding-top: 10px;
+	margin-bottom: 1em;
+	
+}
+.primary-color{
+	background-color:#4989bd;
+}
+.success-color{
+	background-color:#5cb85c;
+}
+.danger-color{
+	background-color:#d9534f;
+}
+.warning-color{
+	background-color:#f0ad4e;
+}
+.info-color{
+	background-color:#5bc0de;
+}
+.no-color{
+	background-color:inherit;
+}

@@ -12,7 +12,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class uploadController extends Controller
 {
-    public function indexAction(Request $request)
+
+    public function indexAction(){
+        return $this->render('umespaUserBundle:AlunoController:enviaDocumentos.html.twig',array(
+            'erro'=>'',
+            'erro1'=> ''));
+    }
+
+    public function indexsAction(Request $request)
     {   
 
       //  print_r($request->getMethod());//identifica o method

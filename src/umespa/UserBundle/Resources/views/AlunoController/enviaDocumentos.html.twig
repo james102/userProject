@@ -6,40 +6,67 @@
  {{ parent() }}
 
 
+<div  class="container" style="margin-top: 101px;">  
+   	{% for message in app.session.flashbag.get('notice') %}
+			<div class="alert alert-danger">{{ message }}</div>
+	{% endfor %}
 
-<div class="titulo "style="margin-top: 101px;">   
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 page-header">
-                <h3>Envio de Documentos</h3>
+	<div class="panel panel-default">{# div Titulo #}
+		<div class="panel-heading"><h2>Enviar Documentos</h2></div>           
+        <div class="box-form panel-body">
+        <form action="{{path('umespa_finalizar')}}" id="formUpload" method="post" autocomplete="off" enctype="multipart/form-data">   
+
+            <div class="row">
+                <div class="form-group col-md-4 text-left">
+                    <ul class="list-group">
+                        <dt>Foto no tamanho 3x4</dt>                  
+                    </ul>
+                    <img id="imgFoto" class="documento thumbnail "  width="100px" height="120px">                               
+                    <input type="file" id="fileFoto" name="fileFoto" accept="image/jpeg" style="display: none" onchange="getFile(this.files[0], 'imgFoto', 'foto')">
+                    <p><span class="glyphicon glyphicon-alert text-danger"></span> São aceitos somente arquivos no formato JPEG/JPG</p>
+                    <label for="fileFoto" class="btn btn-success">Enviar Foto</label>
+                </div>
             </div>
+            <div class="row">
+                <div class="form-group col-md-4 text-left">
+                    <ul class="list-group">
+                        <dt>Comprovação de Situação Estudantil</dt>                  
+                    </ul>
+                    <img id="imgComprovante" class="documento thumbnail "  width="300px" height="200px">                               
+                    <input type="file" id="fileComprovante" name="fileFoto" accept="image/jpeg" style="display: none" onchange="getFile(this.files[0], 'imgComprovante', 'comprovante')">
+                    <p><span class="glyphicon glyphicon-alert text-danger"></span> São aceitos somente arquivos no formato JPEG/JPG</p>
+                    <label for="fileComprovante" class="btn btn-success">Enviar Comprovante</label>
+                </div>
+            </div>   
+            <div class="row">
+                <div class="form-group col-md-4 text-left">
+                    <ul class="list-group">
+                        <dt>Documento com foto(RG,CNH)</dt>                  
+                    </ul>
+                    <img id="imgDocumento" class="documento thumbnail "  width="200px" height="220px">                               
+                    <input type="file" id="fileDocumento" name="fileDocumento" accept="image/jpeg" style="display: none" onchange="getFile(this.files[0], 'imgDocumento', 'Documento')">
+                    <p><span class="glyphicon glyphicon-alert text-danger"></span> São aceitos somente arquivos no formato JPEG/JPG</p>
+                    <label for="fileDocumento" class="btn btn-success">Enviar Documento</label>
+                </div>
+            </div>              
+           
+        </form> 
+    </div>{# Div Body #}   
+     </br>
+        <div class="col-md-12 text-center" style="padding-top:10px">
+            <a href="#" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-triangle-left"></span> Voltar</a>
+            <button type="submit" nome="upload" id="upload" class="btn btn-success btn-lg">Continuar<span class="glyphicon glyphicon-triangle-right"></span></button>
         </div>
-</div>
+    </div>   
+
+	
+</div> {# Div Container #}   
+
+{# <div class="container align-center"> #}
+       
 
 
-<div class="container align-center">
-        <form action="{{path('index')}}" id="formUpload" method="post" autocomplete="off" enctype="multipart/form-data">
-            <div class="panel panel-success">
-                <div class="panel-heading" style="background-color: coral; "><img src="" alt="">&nbsp;<b>Foto 3x4</b></div> 
-                    <div class="panel-body" >                        
-                         <div class="row">
-                          <div class="form-group col-md-4 text-center">
-                                <img id="imgFoto" class="documento thumbnail "  width="150px" height="200px"><br>                                
-                                <input type="file" id="fileFoto" name="fileFoto" accept="image/jpeg" style="display: none" onchange="getFile(this.files[0], 'imgFoto', 'foto')">
-                                <span class="alert alert-danger">{{ erro }}</span><br>
-                                <label for="fileFoto" class="btn btn-success">Enviar Foto</label><br><br>
-                            </div>
-                               <div class="form-group col-md-2 text-center"></div>
-                             <div class="form-group col-md-4">
-                                <ul class="list-group">
-                                <dt>Foto no tamanho 3x4</dt>                  
-                                </ul>
-                                <p><span class="glyphicon glyphicon-alert text-danger"></span> São aceitos somente arquivos no formato JPEG/JPG</p>
-                            </div>   
-                         </div>                            
-                    </div>
-                  
-            </div>    
-            {# envia doc #}
+            {# envia doc
             <div class="panel panel-success" >
                 <div class="panel-heading" style="background-color: coral;"><img src="" alt="">&nbsp;<b>Comprovação de Situação Estudantil</b></div> 
                     <div class="panel-body" >                        
@@ -63,18 +90,18 @@
                          </div>                            
                     </div>
                   
-            </div>    
+            </div>     #}
 
-            <div class="col-md-12 text-center">
+            {# <div class="col-md-12 text-center">
                     <a href="#" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-triangle-left"></span> Voltar</a>
                     <button type="button" nome="upload" id="upload" class="btn btn-success btn-lg">Continuar <span class="glyphicon glyphicon-triangle-right"></span></button>
                 </div>
-        </form>        
-</div>   
-</br></br>
+        </form>         #}
+{# </div>    #}
+{# </br></br>
 </br>
 </br>
-</br>
+</br> #}
 
 
  {# {{ parent() }} #}

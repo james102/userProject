@@ -18,12 +18,55 @@ class AlunoControllerController extends Controller
 {
     public function testAction()
     {
-        return $this->render('umespaUserBundle:AlunoController:addAluno.html.twig');
+        return $this->render('umespaUserBundle:AlunoController:progresso.html.twig');
+        // return $this->render('umespaUserBundle:AlunoController:continuaCadastro.html.twig');
+
+    }
+    public function finalizarAction()
+    {
+        return $this->render('umespaUserBundle:AlunoController:finalizaSolicitacao.html.twig');
     }
     
+    public function loginAction(Request $request)
+    {  
+        $email=$request->get('email');//->getData();
+        $senha=$request->get('senha');
+        //pega etapa do cadastro 
+        // print_r($dados1);die;
+        $tempRepository = $this->getDoctrine()->getRepository('umespaUserBundle:Temp');
+        $query = $tempRepository->findBy(array('email' =>$email,'senha'=>$senha));    
+      
+        if(($query)){             
+                    
+        return $this->render('umespaUserBundle:AlunoController:continuaCadastro.html.twig',array('dados'=>$query));
+        }else{
+            $session=$this->get('session');
+            $session->getFlashBag()->add('notice', 'Email ou senha inválido!');
+            return $this->render('umespaUserBundle:AlunoController:login.html.twig');
+        }        
+        //$email = $query->getEmail('email'); pega valor do campo no array
+      
+       return new Response('Erro: favor contatar o adm');
+    }
+
+
     public function confirmaAction($token)
     {
-       return new Response($token);
+        $tempRepository = $this->getDoctrine()->getRepository('umespaUserBundle:Temp');
+        $query = $tempRepository->findOneByEmail(base64_decode($token));   
+        $confirma= $query->getConfirma();
+        //echo( $confirma);die;      
+      
+        if(($query) && ($confirma=='0')){
+            $em = $this->getDoctrine()->getManager();
+            $query->setConfirma('1');            
+            $em->flush();      
+                    
+        return $this->render('umespaUserBundle:AlunoController:continuaCadastro.html.twig',array('dados'=>$query));
+        }        
+        //$email = $query->getEmail('email'); pega valor do campo no array
+      
+       return new Response('Erro: favor contatar o adm');
     }
 
     public function criaContaAction($cad)
@@ -79,32 +122,32 @@ class AlunoControllerController extends Controller
      $port=$r->getPort();  
      $host=$r->getHost()  ;
      $url=$host.':'.$port.'/lumespa_login';
-    // echo($url);die;
+     //echo($url);die;
 
      $emailForm=$form->get('email')->getData();
      $nome=$form->get('nome')->getData();
      $senha=$form->get('senha')->getData();
      $senhaConf = $form->get('confirma')->getData();
      
-    // $encoder = $this->container->get('security.password_encoder');
-    // print_r($encoder);die;
+     //$encoder = $this->container->get('security.password_encoder');
+     //print_r($encoder);die;
   
-    // $encoded = $encoder->encodePassword($temp,$senha);
+     //$encoded = $encoder->encodePassword($temp,$senha);
     
-    // echo($fileName);die;
+     //echo($fileName);die;
      //echo($emailForm);
-    //echo sprintf("%s\n", $emailForm);
+     //echo sprintf("%s\n", $emailForm);
 
     $tempRepository = $this->getDoctrine()->getRepository('umespaUserBundle:Temp');
     $email = $tempRepository->findOneBy(['email' => $emailForm]);    
     if($email){
-       // print_r($email);die;
-      // echo('Email ja esta em uso!');   
+     //print_r($email);die;
+     //echo('Email ja esta em uso!');   
       $session=$this->get('session');
       $session->getFlashBag()->add('notice', 'O email: '.$emailForm.' já esta em uso');
-    //  print_r($session);
-       return $this->render('umespaUserBundle:AlunoController:criaConta.html.twig',array(
-        //   'erro'=>'Email ja esta em uso!',
+      //print_r($session);
+      return $this->render('umespaUserBundle:AlunoController:criaConta.html.twig',array(
+      //'erro'=>'Email ja esta em uso!',
            'page'=>'Criar Conta',
            'nome'=> 'Criar Conta',
            'form' => $form->createView())); 

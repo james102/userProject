@@ -18,6 +18,11 @@ umespa_confirma:
     path:     /confirma/{token}
     defaults: { _controller: umespaUserBundle:AlunoController:confirma } 
 
+#confirma email     
+umespa_finalizar:
+    path:     /finalizar
+    defaults: { _controller: umespaUserBundle:AlunoController:finalizar }     
+
     
 umespa_trataDadosTemp:
     path:     /trataDados

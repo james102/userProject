@@ -4,14 +4,31 @@
 
 {% block body %}
 {{parent()}}
-<div class="titulo">   
+{# <div class="container" style="margin-top: 101px;">   
         <div class="row">
             <div class="col-md-8 col-md-offset-2 page-header">
-                <h3> Preenchimento de Dados</h3>
+                <h4> Ola <strong>Ibones Cavalcante</strong> Prosiga com os dados solicitados</h4>
             </div>
         </div>
-    </div>
-    <div class="form-cadastro row">
+    </div> #}
+
+
+	<div  class="container" style="margin-top: 101px;">
+
+    
+		{# {% for message in app.session.flashbag.get('notice') %}
+			<div class="alert alert-danger">
+			{{ message }}
+			</div>
+			{% endfor %} #}
+	 {# <span class="text-danger">{{ erro }}</span>  #}
+		<div class="panel panel-default">    	
+ 		
+			<div class="panel-heading">
+			 <h4> Ola <strong>Ibones Cavalcante</strong> Prosiga com os Dados Solicitados</h4>
+        </div>
+
+    <div class="box-form panel-body">
     {# <div class="col-md-6">
         <div class="row">
             <div class="cart col-md-8 col-md-offset-2">
@@ -37,16 +54,16 @@
             </div>
         </div>
     </div> #}
-    <div class="container">
+  
     <div class=" col-md-6">
-        <form action="/formulario/public/aluno/cadastro" id="formCadastro" method="post" autocomplete="off" enctype="application/x-www-form-urlencoded">
+        <form action="{{path('index')}}" id="formCadastro" method="post" autocomplete="off" enctype="application/x-www-form-urlencoded">
          
-                        <div class="row">
+                        {# <div class="row">
                         <div class="col-md-10 form-group">
-                    {# <label for="nome" class="control-label">Nome</label> #}
+                    <label for="nome" class="control-label">Nome</label>
                     <input type="text" class="form-control" name="nome" id="nome" value="ibones cavalcante"placeholder="nome">
                                     </div>
-            </div>
+            </div> #}
             
             <div class="row">
                 <div class="col-sm-5 form-group">
@@ -92,19 +109,19 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            {# <div class="row">
                 <div class="col-md-4 form-group">
-                    {# <label for="estado" class="control-label">Estado</label> #}
+                    <label for="estado" class="control-label">Estado</label>
                                             <input type="text" class="form-control" name="estado" id="estado" value=""placeholder="estado">
 
                      
                 </div>
                 <div class="col-md-6 form-group">
-                    {# <label for="cidade" class="control-label">Cidade</label> #}
+                    <label for="cidade" class="control-label">Cidade</label>
                      <input type="text" class="form-control" name="cidade" id="cidade" value=""placeholder="cidade">
 
                 </div>
-            </div>
+            </div> #}
             <div class="row">
                 <div class="col-sm-4 form-group">
                     {# <label for="escolaridade" class="control-label">Nível de Ensino</label> #}
@@ -139,7 +156,7 @@
 
             <div class="row padding-top-15">
                 <div class="col-md-8 col-md-offset-3">
-                    <button type="button" class="btn btn-success btn-lg" id="continuar">Continuar <span class="glyphicon glyphicon-triangle-right"></span></button>
+                    <button type="submit" class="btn btn-success btn-lg" id="continuar">Continuar <span class="glyphicon glyphicon-triangle-right"></span></button>
                 </div>
             </div>
         </form>

@@ -9,6 +9,7 @@ function getFile(file, image, input) {
 
     reader.onload = function () {
         document.getElementById(image).src = reader.result;
+     //   document.getElementById(image).show();
         document.getElementById(input).value = reader.result;
     };
 
@@ -18,15 +19,21 @@ function getFile(file, image, input) {
 /**
  verifica se foi selecionado arquivo
  */
+var fileComprovante = document.getElementById("fileDocumento");
 var fileComprovante = document.getElementById("fileComprovante");
 var fileFoto = document.getElementById("fileFoto");
 
 var enviar = document.getElementById("upload");
 var form =document.getElementById("formUpload");
 
+
 enviar.addEventListener("click", function (event) 
 {
   if (fileComprovante.files.length == 0) {
+    alert("E necessário que um arquvio seja enviado");
+    return;
+  }
+  if (fileDocumento.files.length == 0) {
     alert("E necessário que um arquvio seja enviado");
     return;
   }

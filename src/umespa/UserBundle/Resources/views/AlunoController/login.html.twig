@@ -1,0 +1,31 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+{{ parent() }}
+	<div  class="container" style="margin-top: 101px;">
+		{% for message in app.session.flashbag.get('notice') %}
+			<div class="alert alert-danger">
+			{{ message }}
+			</div>
+		{% endfor %}
+		<div class="panel panel-default"> 
+			<div class="panel-heading"><h2>Login</h2></div>
+                <div class="box-form panel-body">
+                       <form action="{{path('umespa_login')}}" id="formCadastro" method="post" autocomplete="off" enctype="application/x-www-form-urlencoded">
+                       	<div class="row">	
+					  	  <div class="form-group col-xs-4">
+                            <input type="text" class="form-control" name="email" id="email" value="" placeholder="email">
+                              <br>
+                            <input type="password" class="form-control" name="senha" id="senha" value="" placeholder="emsenhaail">
+                            <br>
+                            <button type="submit" class="btn btn-success btn-lg" id="continuar">Continuar</button>
+
+                          </div> 
+                        </div>   
+                       </form>
+			
+                </div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
